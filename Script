@@ -1,0 +1,262 @@
+if(!FileExist(rolador.cfg))
+{
+	FileAppend,Nome do Personagem`nAtaque Primário`nd20+0`nd6+0`nAtaque Secundário`nd20+0`nd6+0`nOutro`nd20+0`n`nIniciativa`nd20+0`n`n,rolador.cfg
+}
+FileRead,config,rolador.cfg
+config:=StrSplit(config,"`n","`r`n")
+nome:=config[1]
+a1:=config[2]
+r1:=config[3]
+d1:=config[4]
+a2:=config[5]
+r2:=config[6]
+d2:=config[7]
+a3:=config[8]
+r3:=config[9]
+d3:=config[10]
+a4:=config[11]
+r4:=config[12]
+d4:=config[13]
+FileDelete,rolador.cfg
+
+SetKeyDelay,0,0
+Gui, Add, Text, x5 y7 w40 h20 , Nome:
+Gui, Add, Text, x42 y26 w120 h20 Center, Descrição
+Gui, Add, Text, x172 y26 w50 h20 Center, Rolagem
+Gui, Add, Text, x232 y26 w50 h20 Center, Dano
+Gui, Add, Button, x5 y40 w30 h20 gRoll1, F1
+Gui, Add, Button, x5 y70 w30 h20 gRoll2, F2
+Gui, Add, Button, x5 y100 w30 h20 gRoll3, F3
+Gui, Add, Button, x5 y130 w30 h20 gRoll4, F4
+Gui, Add, Edit, x42 y5 w230 h20 vnome,%nome%
+Gui, Add, Edit, x42 y40 w120 h20 va1,%a1%
+Gui, Add, Edit, x42 y70 w120 h20 va2,%a2%
+Gui, Add, Edit, x42 y100 w120 h20 va3,%a3%
+Gui, Add, Edit, x42 y130 w120 h20 va4,%a4%
+Gui, Add, Edit, x172 y40 w50 h20 vr1,%r1%
+Gui, Add, Edit, x172 y70 w50 h20 vr2,%r2%
+Gui, Add, Edit, x172 y100 w50 h20 vr3,%r3%
+Gui, Add, Edit, x172 y130 w50 h20 vr4,%r4%
+Gui, Add, Edit, x232 y40 w50 h20 vd1,%d1%
+Gui, Add, Edit, x232 y70 w50 h20 vd2,%d2%
+Gui, Add, Edit, x232 y100 w50 h20 vd3,%d3%
+Gui, Add, Edit, x232 y130 w50 h20 vd4,%d4%
+Gui,Add,CheckBox,x285 y36 vva1 gCheck1,V
+Gui,Add,CheckBox,x285 y49 vde1 gCheck2,D
+Gui,Add,CheckBox, x285 y66 vva2 gCheck3,V
+Gui,Add,CheckBox,x285 y79 vde2 gCheck4,D
+Gui,Add,CheckBox, x285 y96 vva3 gCheck5,V
+Gui,Add,CheckBox,x285 y109 vde3 gCheck6,D
+Gui,Add,CheckBox, x285 y126 vva4 gCheck7,V
+Gui,Add,CheckBox,x285 y139 vde4 gCheck8,D
+Gui,Font,s7,Arial
+Gui, Add, Text,x275 y5 w40 h15, Vantagem
+Gui, Add, Text, x275 y18 w40 h15, Desvantagem
+SetTitleMatchMode, 2
+gui,+alwaysontop
+SysGet,area,MonitorWorkArea
+ax:=areaRight-316
+ay:=areaBottom-188
+ax:=A_ScreenWidth-316
+ay:=A_ScreenHeight-230
+Gui, Show, w316 h164 x%ax% y%ay%, Rolagem
+return
+
+
+
+F1::
+Roll1:
+aa:=""
+Gui,submit,nohide
+if(d1!="")
+	d1:=";" . d1
+WinActivate,Discord
+if (!va1 and !de1)
+	sendraw,!%r1%%d1%#%nome% - %a1%`n
+if va1
+{
+	if(n:=InStr(r1,"+"))
+	{
+		aa:=SubStr(r1,n)
+		r1:=SubStr(r1,1,n-1)
+	}
+	if(n:=InStr(r1,"-"))
+	{
+		aa:=SubStr(r1,n)
+		r1:=SubStr(r1,1,n-1)
+	}
+	sendraw,!2%r1%k1%aa%%d1%#%nome% - %a1% com Vantagem`n
+}
+if de1
+{
+	if(n:=InStr(r1,"+"))
+	{
+		aa:=SubStr(r1,n)
+		r1:=SubStr(r1,1,n-1)
+	}
+	if(n:=InStr(r1,"-"))
+	{
+		aa:=SubStr(r1,n)
+		r1:=SubStr(r1,1,n-1)
+	}
+	sendraw,!2%r1%kl1%aa%%d1%#%nome% - %a1% com Desvantagem `n
+}
+return
+
+
+F2::
+Roll2:
+aa:=""
+Gui,submit,nohide
+if(d2!="")
+	d2:=";" . d2
+WinActivate,Discord
+if (!va2 and !de2)
+	sendraw,!%r2%%d2%#%nome% - %a2%`n
+if va2
+{
+	if(n:=InStr(r2,"+"))
+	{
+		aa:=SubStr(r2,n)
+		r2:=SubStr(r2,1,n-1)
+	}
+	if(n:=InStr(r2,"-"))
+	{
+		aa:=SubStr(r2,n)
+		r2:=SubStr(r2,1,n-1)
+	}
+	sendraw,!2%r2%k1%aa%%d2%#%nome% - %a2% com Vantagem `n
+}
+if de2
+{
+	if(n:=InStr(r2,"+"))
+	{
+		aa:=SubStr(r2,n)
+		r2:=SubStr(r2,1,n-1)
+	}
+	if(n:=InStr(r2,"-"))
+	{
+		aa:=SubStr(r2,n)
+		r2:=SubStr(r2,1,n-1)
+	}
+	sendraw,!2%r2%kl1%aa%%d2%#%nome% - %a2% com Desvantagem `n
+}
+return
+
+
+F3::
+Roll3:
+aa:=""
+Gui,submit,nohide
+if(d3!="")
+	d3:=";" . d3
+WinActivate,Discord
+if (!va3 and !de3)
+	sendraw,!%r3%%d3%#%nome% - %a3%`n
+if va3
+{
+	if(n:=InStr(r3,"+"))
+	{
+		aa:=SubStr(r3,n)
+		r3:=SubStr(r3,1,n-1)
+	}
+	if(n:=InStr(r3,"-"))
+	{
+		aa:=SubStr(r3,n)
+		r3:=SubStr(r3,1,n-1)
+	}
+	sendraw,!2%r3%k1%aa%%d3%#%nome% - %a3% com Vantagem `n
+}
+if de3
+{
+	if(n:=InStr(r3,"+"))
+	{
+		aa:=SubStr(r3,n)
+		r3:=SubStr(r3,1,n-1)
+	}
+	if(n:=InStr(r3,"-"))
+	{
+		aa:=SubStr(r3,n)
+		r3:=SubStr(r3,1,n-1)
+	}
+	sendraw,!2%r3%kl1%aa%%d3%#%nome% - %a3% com Desvantagem `n
+}
+return
+
+
+F4::
+Roll4:
+aa:=""
+Gui,submit,nohide
+if(d4!="")
+	d4:=";" . d4
+WinActivate,Discord
+if (!va4 and !de4)
+	sendraw,!%r4%%d4%#%nome% - %a4%`n
+if va4
+{
+	if(n:=InStr(r4,"+"))
+	{
+		aa:=SubStr(r4,n)
+		r4:=SubStr(r4,1,n-1)
+	}
+	if(n:=InStr(r4,"-"))
+	{
+		aa:=SubStr(r4,n)
+		r4:=SubStr(r4,1,n-1)
+	}
+	sendraw,!2%r4%k1%aa%%d4%#%nome% - %a4% com Vantagem `n
+}
+if de4
+{
+	if(n:=InStr(r4,"+"))
+	{
+		aa:=SubStr(r4,n)
+		r4:=SubStr(r4,1,n-1)
+	}
+	if(n:=InStr(r4,"-"))
+	{
+		aa:=SubStr(r4,n)
+		r4:=SubStr(r4,1,n-1)
+	}
+	sendraw,!2%r4%kl1%aa%%d4%#%nome% - %a4% com Desvantagem `n
+}
+return
+
+Check1:
+GuiControl,,de1,0
+return
+
+Check2:
+GuiControl,,va1,0
+return
+
+Check3:
+GuiControl,,de2,0
+return
+
+Check4:
+GuiControl,,va2,0
+return
+
+Check5:
+GuiControl,,de3,0
+return
+
+Check6:
+GuiControl,,va3,0
+return
+
+Check7:
+GuiControl,,de4,0
+return
+
+Check8:
+GuiControl,,va4,0
+return
+
+
+GuiClose:
+gui,submit,nohide
+FileAppend,%nome%`n%a1%`n%r1%`n%d1%`n%a2%`n%r2%`n%d2%`n%a3%`n%r3%`n%d3%`n%a4%`n%r4%`n%d4%`n,rolador.cfg
+ExitApp
